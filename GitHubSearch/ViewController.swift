@@ -22,6 +22,15 @@ class ViewController: UIViewController {
     let tableHelper: SearchTableViewController = SearchTableViewController()
     let requestQueue1 = DispatchQueue(label: "queue1")
     let requestQueue2 = DispatchQueue(label: "queue2")
+    var repos = [String]()
+    
+    var rsp = [String]() {
+        didSet {
+            repos = rsp
+            print("REPOS ARE::::: \(repos)")
+        }
+    }
+    
     
     override func viewDidLoad() {
         tableHelper.zzz = self
@@ -31,14 +40,14 @@ class ViewController: UIViewController {
         resultsTable.allowsSelection = true
         resultsTable.isScrollEnabled = true
         super.viewDidLoad()
-     
     }
-
+    
     func alamofireResponse() {
         let q = searchField.text!
         let url = "https://api.github.com/search/repositories?q=" + "\(q)" + "&sort=stars&order=desc"
-      
-        AF.request(url).responseJSON(completionHandler: { response in
+
+        AF.request(url).responseJSON(completionHandler: { [self] response in
+        
             switch response.result {
                         case .success(let JSON):
                             let response = JSON as! NSDictionary
@@ -47,23 +56,26 @@ class ViewController: UIViewController {
                          //   print(name)
                             
                             if let array = name as? [[String: Any]] {
-                                let reposArray = array.compactMap { $0["full_name"] as? String }
-                           print(reposArray)
-                            
+                                rsp = array.compactMap { $0["full_name"] as? String }
                             }
-
                         case .failure(let error):
                             print("Error!!! \(error)")
                         }
         })
-
     }
 
     
     @IBAction func doSearch(_ sender: Any) {
-alamofireResponse()
+        alamofireResponse()
 }
 
     
     
-}
+     }
+    
+    
+    
+    
+    
+    
+
