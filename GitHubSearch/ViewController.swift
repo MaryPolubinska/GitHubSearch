@@ -2,80 +2,104 @@
 //  ViewController.swift
 //  GitHubSearch
 //
-//  Created by Mary on 10.11.2020.
+//  Created by Mary on 18.11.2020.
 //
 
 import UIKit
 import Alamofire
-import Foundation
 import SwiftyJSON
 
-class ViewController: UIViewController {
-
-    @IBOutlet weak var searchField: UITextField!
+class ViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+   
+        var repos = [GitResponse]()
     
-    @IBOutlet weak var searchButton: UIButton!
-    
-    @IBOutlet weak var resultsTable: UITableView!
-    
-    
-    let tableHelper: SearchTableViewController = SearchTableViewController()
-    let requestQueue1 = DispatchQueue(label: "queue1")
-    let requestQueue2 = DispatchQueue(label: "queue2")
-    var repos = [String]()
-    
-    var rsp = [String]() {
-        didSet {
-            repos = rsp
-            print("REPOS ARE::::: \(repos)")
+      /*  var rsp = [String]() {
+            didSet {
+             print("TTT \(rsp)")
+            }
         }
-    }
+      
+    */
+  
+    @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var searchTable: UITableView!
     
     override func viewDidLoad() {
-        tableHelper.zzz = self
-        resultsTable.dataSource = tableHelper
-        resultsTable.delegate = tableHelper
-        var searchText = searchField.text
-        resultsTable.allowsSelection = true
-        resultsTable.isScrollEnabled = true
         super.viewDidLoad()
-    }
-    
-    func alamofireResponse() {
-        let q = searchField.text!
-        let url = "https://api.github.com/search/repositories?q=" + "\(q)" + "&sort=stars&order=desc"
 
+    }
+
+    func gitReposSearch(text: String, completion: @escaping ([GitResponse]) -> Void) {
+        let url = "https://api.github.com/search/repositories?q=" + "\(text)" + "&sort=stars&order=desc"
+      AF.request(url).responseDecodable(of: GitResponses.self) { response in
+          guard let items = response.value else {
+            return completion([])
+          }
+          completion(items.items)
+        }
+    }
+
+/*
+    func alamofireResponse() {
+        let q = searchBar.text ?? ""
+        let url = "https://api.github.com/search/repositories?q=" + "\(q)" + "&sort=stars&order=desc"
         AF.request(url).responseJSON(completionHandler: { [self] response in
-        
             switch response.result {
                         case .success(let JSON):
                             let response = JSON as! NSDictionary
                             let name = response.value(forKey: "items")
-                          //  print(name is NSArray)
-                         //   print(name)
-                            
                             if let array = name as? [[String: Any]] {
                                 rsp = array.compactMap { $0["full_name"] as? String }
+                                print("RSP ===== \(rsp)")
                             }
                         case .failure(let error):
                             print("Error!!! \(error)")
                         }
         })
     }
-
+    */
+ 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Repos count is \(repos.count)")
+        return repos.count
+    }
     
-    @IBAction func doSearch(_ sender: Any) {
-        alamofireResponse()
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "repoCell")
+        cell?.textLabel?.text = repos[indexPath.row].fullName
+        return cell!
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        print("Cancell")
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("Search")
+        let q = searchBar.text ?? ""
+        gitReposSearch(text: q) { repos in
+          self.repos = repos
+            self.searchTable.reloadData()
+        }
+    }
 }
 
-    
-    
-     }
-    
-    
-    
-    
-    
-    
+struct GitResponse {
+  let fullName: String
+  enum Keys: String, CodingKey {
+    case fullName = "full_name"
+  }
+}
 
+struct GitResponses: Decodable {
+  let items: [GitResponse]
+}
+
+extension GitResponse: Decodable {
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: Keys.self)
+    fullName = try container.decode(String.self, forKey: .fullName)
+  }
+}

@@ -8,27 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		3453E715BA5CF605B03900DF /* Pods_GitHubSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D8B04ABF502AE6C04FF1549 /* Pods_GitHubSearch.framework */; };
+		446B8F2B2565133400F84657 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446B8F2A2565133400F84657 /* ViewController.swift */; };
 		44EF733F255B21A00093956B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EF733E255B21A00093956B /* AppDelegate.swift */; };
 		44EF7341255B21A00093956B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EF7340255B21A00093956B /* SceneDelegate.swift */; };
-		44EF7343255B21A00093956B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EF7342255B21A00093956B /* ViewController.swift */; };
 		44EF7346255B21A00093956B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44EF7344255B21A00093956B /* Main.storyboard */; };
 		44EF7349255B21A00093956B /* GitHubSearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 44EF7347255B21A00093956B /* GitHubSearch.xcdatamodeld */; };
 		44EF734B255B21A40093956B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44EF734A255B21A40093956B /* Assets.xcassets */; };
 		44EF734E255B21A40093956B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44EF734C255B21A40093956B /* LaunchScreen.storyboard */; };
-		44EF735F255B342E0093956B /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44EF735E255B342E0093956B /* SearchTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		446B8F2A2565133400F84657 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		44EF733B255B21A00093956B /* GitHubSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44EF733E255B21A00093956B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		44EF7340255B21A00093956B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		44EF7342255B21A00093956B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		44EF7345255B21A00093956B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		44EF7348255B21A00093956B /* GitHubSearch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHubSearch.xcdatamodel; sourceTree = "<group>"; };
 		44EF734A255B21A40093956B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44EF734D255B21A40093956B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		44EF734F255B21A50093956B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		44EF735E255B342E0093956B /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		4F4927D66856F4A070B593CD /* Pods-GitHubSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubSearch.release.xcconfig"; path = "Target Support Files/Pods-GitHubSearch/Pods-GitHubSearch.release.xcconfig"; sourceTree = "<group>"; };
 		6D8B04ABF502AE6C04FF1549 /* Pods_GitHubSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitHubSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE5B0BB0C65D2D082B79586E /* Pods-GitHubSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubSearch.debug.xcconfig"; path = "Target Support Files/Pods-GitHubSearch/Pods-GitHubSearch.debug.xcconfig"; sourceTree = "<group>"; };
@@ -78,9 +76,8 @@
 			children = (
 				44EF733E255B21A00093956B /* AppDelegate.swift */,
 				44EF7340255B21A00093956B /* SceneDelegate.swift */,
-				44EF7342255B21A00093956B /* ViewController.swift */,
-				44EF735E255B342E0093956B /* SearchTableViewController.swift */,
 				44EF7344255B21A00093956B /* Main.storyboard */,
+				446B8F2A2565133400F84657 /* ViewController.swift */,
 				44EF734A255B21A40093956B /* Assets.xcassets */,
 				44EF734C255B21A40093956B /* LaunchScreen.storyboard */,
 				44EF734F255B21A50093956B /* Info.plist */,
@@ -211,10 +208,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44EF7343255B21A00093956B /* ViewController.swift in Sources */,
 				44EF733F255B21A00093956B /* AppDelegate.swift in Sources */,
-				44EF735F255B342E0093956B /* SearchTableViewController.swift in Sources */,
 				44EF7349255B21A00093956B /* GitHubSearch.xcdatamodeld in Sources */,
+				446B8F2B2565133400F84657 /* ViewController.swift in Sources */,
 				44EF7341255B21A00093956B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
