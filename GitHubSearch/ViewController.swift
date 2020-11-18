@@ -18,26 +18,28 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
              print("TTT \(rsp)")
             }
         }
-      
     */
-  
+    
+    let semaphore = DispatchSemaphore(value: 2)
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var searchTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
 
     func gitReposSearch(text: String, completion: @escaping ([GitResponse]) -> Void) {
-        let url = "https://api.github.com/search/repositories?q=" + "\(text)" + "&sort=stars&order=desc"
+        let url = "https://api.github.com/search/repositories?per_page=15&q=" + "\(text)" + "&sort=stars&order=desc"
+        semaphore.wait()
       AF.request(url).responseDecodable(of: GitResponses.self) { response in
           guard let items = response.value else {
             return completion([])
           }
           completion(items.items)
         }
+        semaphore.signal()
     }
 
 /*
@@ -52,6 +54,7 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
                             if let array = name as? [[String: Any]] {
                                 rsp = array.compactMap { $0["full_name"] as? String }
                                 print("RSP ===== \(rsp)")
+                                print(rsp is NSArray)
                             }
                         case .failure(let error):
                             print("Error!!! \(error)")
@@ -73,6 +76,10 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
+        gitReposSearch(text: "") { repos in
+            self.repos = repos
+              self.searchTable.reloadData()
+          }
         print("Cancell")
     }
     

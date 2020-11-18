@@ -21,7 +21,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Yru-LT-EfT"/>
                                 </constraints>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="webSearch" keyboardAppearance="light" returnKeyType="go"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
                                     <string>Title</string>
