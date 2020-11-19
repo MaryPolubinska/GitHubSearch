@@ -2,8 +2,9 @@
 //  ViewController.swift
 //  GitHubSearch
 //
-//  Created by Mary on 18.11.2020.
-//
+//  Created by Mary Polubinska on 18.11.2020
+
+//Perform a search for GitHub repositories, show 30 results. Search is done in 2 background threads with 15 results in each thread. Ordered by stars, desc.
 
 import UIKit
 import Alamofire
