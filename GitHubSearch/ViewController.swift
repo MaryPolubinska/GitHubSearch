@@ -93,14 +93,14 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("Search was initiated")
         let q = searchBar.text ?? ""
-            requestQueue1.sync {
-                gitReposSearch(text: q, page: 1) { repos1 in
+            requestQueue1.async {
+                self.gitReposSearch(text: q, page: 1) { repos1 in
                   self.repos1 = repos1
                     self.searchTable.reloadData()
                 }
             }
-        requestQueue2.sync {
-            gitReposSearch(text: q, page: 2) { repos2 in
+        requestQueue2.async {
+            self.gitReposSearch(text: q, page: 2) { repos2 in
               self.repos2 = repos2
                 self.searchTable.reloadData()
             }
