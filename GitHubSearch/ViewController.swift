@@ -11,7 +11,8 @@ import SwiftyJSON
 
 class ViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
    
-        var repos = [GitResponse]()
+    var repos1 = [GitResponse]()
+    var repos2 = [GitResponse]()
     
       /*  var rsp = [String]() {
             didSet {
@@ -20,26 +21,27 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
         }
     */
     
-    let semaphore = DispatchSemaphore(value: 2)
     @IBOutlet weak var searchBar: UISearchBar!
     
     @IBOutlet weak var searchTable: UITableView!
+    
+    let requestQueue1 = DispatchQueue(label: "queue1", qos: .background)
+    let requestQueue2 = DispatchQueue(label: "queue2", qos: .background)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
 
-    func gitReposSearch(text: String, completion: @escaping ([GitResponse]) -> Void) {
-        let url = "https://api.github.com/search/repositories?per_page=15&q=" + "\(text)" + "&sort=stars&order=desc"
-        semaphore.wait()
+    func gitReposSearch(text: String, page: Int, completion: @escaping ([GitResponse]) -> Void) {
+        let url = "https://api.github.com/search/repositories?page=\(page)&per_page=15&q=" + "\(text)" + "&sort=stars&order=desc"
       AF.request(url).responseDecodable(of: GitResponses.self) { response in
           guard let items = response.value else {
             return completion([])
           }
+         print("Got items are: \(items)")
           completion(items.items)
         }
-        semaphore.signal()
     }
 
 /*
@@ -64,31 +66,44 @@ class ViewController: UIViewController,  UITableViewDataSource, UITableViewDeleg
     */
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Repos count is \(repos.count)")
-        return repos.count
+        print("Repos count is \(repos1.count) + \(repos2.count)")
+        return repos1.count + repos2.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "repoCell")
+       let repos = repos1 + repos2
         cell?.textLabel?.text = repos[indexPath.row].fullName
         return cell!
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
-        gitReposSearch(text: "") { repos in
-            self.repos = repos
-              self.searchTable.reloadData()
-          }
-        print("Cancell")
+        for i in 1...2 {
+            gitReposSearch(text: "", page: i) { repos in
+                self.repos1 = repos
+                self.repos2 = repos
+                  self.searchTable.reloadData()
+              }
+        }
+      
+        print("Cancell: clear results")
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("Search")
+        print("Search was initiated")
         let q = searchBar.text ?? ""
-        gitReposSearch(text: q) { repos in
-          self.repos = repos
-            self.searchTable.reloadData()
+            requestQueue1.sync {
+                gitReposSearch(text: q, page: 1) { repos1 in
+                  self.repos1 = repos1
+                    self.searchTable.reloadData()
+                }
+            }
+        requestQueue2.sync {
+            gitReposSearch(text: q, page: 2) { repos2 in
+              self.repos2 = repos2
+                self.searchTable.reloadData()
+            }
         }
     }
 }
