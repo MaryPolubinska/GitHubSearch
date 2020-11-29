@@ -27,7 +27,7 @@
                                     <string>Title</string>
                                 </scopeButtonTitles>
                                 <connections>
-                                    <outlet property="delegate" destination="RdX-pI-mwD" id="U5J-Ka-MDy"/>
+                                    <outlet property="delegate" destination="RdX-pI-mwD" id="Goy-oo-NJi"/>
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sU3-4A-IFv">
@@ -71,7 +71,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchBar" destination="bGD-KD-n3b" id="Rgf-Ra-rFG"/>
+                        <outlet property="searchBar" destination="bGD-KD-n3b" id="s5m-qd-LGY"/>
                         <outlet property="searchTable" destination="sU3-4A-IFv" id="fh1-yl-LLU"/>
                     </connections>
                 </viewController>
