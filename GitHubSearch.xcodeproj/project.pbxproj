@@ -61,6 +61,41 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		44ED68C22654041E001195EC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				44EF733E255B21A00093956B /* AppDelegate.swift */,
+				44EF7340255B21A00093956B /* SceneDelegate.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		44ED68C326540457001195EC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				446B8F2A2565133400F84657 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		44ED68C5265405BD001195EC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				445252ED2573EFD900F1B608 /* GitResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		44ED68C626540602001195EC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4489F11325DA7C4C00CF546C /* EmptyResults.swift */,
+				446B8F662573DA5B00F84657 /* GitResults.swift */,
+				445252F12573F0E100F1B608 /* GitSearch.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		44EF7332255B21A00093956B = {
 			isa = PBXGroup;
 			children = (
@@ -82,14 +117,11 @@
 		44EF733D255B21A00093956B /* GitHubSearch */ = {
 			isa = PBXGroup;
 			children = (
-				44EF733E255B21A00093956B /* AppDelegate.swift */,
-				44EF7340255B21A00093956B /* SceneDelegate.swift */,
+				44ED68C626540602001195EC /* ViewModel */,
+				44ED68C5265405BD001195EC /* Models */,
+				44ED68C326540457001195EC /* Controllers */,
+				44ED68C22654041E001195EC /* Common */,
 				44EF7344255B21A00093956B /* Main.storyboard */,
-				446B8F2A2565133400F84657 /* ViewController.swift */,
-				445252F12573F0E100F1B608 /* GitSearch.swift */,
-				445252ED2573EFD900F1B608 /* GitResponse.swift */,
-				446B8F662573DA5B00F84657 /* GitResults.swift */,
-				4489F11325DA7C4C00CF546C /* EmptyResults.swift */,
 				44EF734A255B21A40093956B /* Assets.xcassets */,
 				44EF734C255B21A40093956B /* LaunchScreen.storyboard */,
 				44EF734F255B21A50093956B /* Info.plist */,
