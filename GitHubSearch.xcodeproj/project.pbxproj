@@ -78,12 +78,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		44ED68C5265405BD001195EC /* Models */ = {
+		44ED68C5265405BD001195EC /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				445252ED2573EFD900F1B608 /* GitResponse.swift */,
 			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		44ED68C626540602001195EC /* ViewModel */ = {
@@ -118,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				44ED68C626540602001195EC /* ViewModel */,
-				44ED68C5265405BD001195EC /* Models */,
+				44ED68C5265405BD001195EC /* Model */,
 				44ED68C326540457001195EC /* Controllers */,
 				44ED68C22654041E001195EC /* Common */,
 				44EF7344255B21A00093956B /* Main.storyboard */,
